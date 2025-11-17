@@ -1,4 +1,12 @@
 {
-    "questions" : ["What is the document about?","What is your name?", "How long is the document?"],
-    "answers" : ["The document is about samsung washing machine instructions","My name is samarpan","The document is 450 pages long"]
+    "questions" : [
+        "What is the document about?",
+        "What is your name?",
+        "How long is the document?"
+        ],
+    "answers" : [
+        "The document is about samsung washing machine instructions",
+        "My name is samarpan",
+        "The document is 450 pages long"
+        ]
 }
