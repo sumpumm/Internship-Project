@@ -1,3 +1,10 @@
+from google import genai
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+client = genai.Client(api_key=os.getenv('API_KEY'))
+
 from sentence_transformers import SentenceTransformer,util
 import json
 
