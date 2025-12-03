@@ -4,17 +4,16 @@ from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer,util
 
 load_dotenv()
+
 #LOADING REQUIRED MODELS
 client = genai.Client(api_key=os.getenv('API_KEY'))
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
-user_question="what is the color of the sky?"
+user_question=input("Ask away: ")
 user_question_embedding=model.encode(user_question)
 
 with open("FAQ.json","r") as f:
     data = json.load(f)
-
-
 
 emb=model.encode(data["questions"])
 cos_sim=util.cos_sim(emb,user_question_embedding)
