@@ -10,14 +10,15 @@ app=FastAPI()
 client = genai.Client(api_key=os.getenv('API_KEY'))
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
+#creating FAQ embeddings
+with open("../FAQ.json","r") as f:
+    data = json.load(f)
+
+emb=model.encode(data["questions"])
+
 @app.post("/chat")
 def chat(input:chatInput):
     user_question_embedding=model.encode(input.query)
-
-    with open("../FAQ.json","r") as f:
-        data = json.load(f)
-
-    emb=model.encode(data["questions"])
     cos_sim=util.cos_sim(emb,user_question_embedding)
 
     id=0
