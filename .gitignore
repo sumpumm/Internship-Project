@@ -1,31 +1,61 @@
+############################
+# Environment Variables
+############################
 .env
+.env.local
+.env.*.local
 
+############################
 # Node.js
+############################
 node_modules/
-.env
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnp.*
+.pnp.js
 
-# Build artifacts
+############################
+# Python / FastAPI
+############################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IMPORTANT: ignore virtual env
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+
+############################
+# Build Artifacts
+############################
 dist/
 build/
 coverage/
+tmp/
+temp/
 
-# Editor/IDE specific
+############################
+# MongoDB
+############################
+dump/
+
+############################
+# Editor / IDE
+############################
 .vscode/
 .idea/
 *.sublime-project
 *.sublime-workspace
+
+############################
+# OS / Misc
+############################
 .DS_Store
-
-# Logs
-logs/
+Thumbs.db
 *.log
-
-# MongoDB
-dump/
-
-# Other temporary files
-tmp/
+logs/

@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+const { v4: uuidv4 } = require("uuid");
+
 
 router.post("/register", async(req,res)=>{
     try {
@@ -25,8 +27,9 @@ router.post("/login",async(req,res)=>{
         if(!is_password){
             return res.status(200).json({message : "Invalid password"});  
         }  
+        const sessionId = uuidv4();
         const {password, ...others}= user._doc; 
-        return res.status(200).json({others});
+        return res.status(200).json({others,sessionId});
     } catch (error) {
         return res.status(200).json({message : "Error"});
     }
