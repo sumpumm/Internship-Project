@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from models import chatInput
 from google import genai
 import os,json
@@ -7,6 +8,15 @@ from sentence_transformers import SentenceTransformer,util
 
 load_dotenv()
 app=FastAPI()
+origins = [ "*", ]
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,   
+        allow_methods=["*"],       
+        allow_headers=["*"],    
+    )
+
 client = genai.Client(api_key=os.getenv('API_KEY'))
 chat_instance = client.chats.create(model="gemini-2.5-flash")
 model = SentenceTransformer("all-MiniLM-L6-v2")
