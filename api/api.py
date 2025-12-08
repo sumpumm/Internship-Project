@@ -8,6 +8,7 @@ from sentence_transformers import SentenceTransformer,util
 load_dotenv()
 app=FastAPI()
 client = genai.Client(api_key=os.getenv('API_KEY'))
+chat_instance = client.chats.create(model="gemini-2.5-flash")
 model = SentenceTransformer("all-MiniLM-L6-v2")
 
 #creating FAQ embeddings
@@ -32,10 +33,7 @@ def chat(input:chatInput):
         id+=1
 
     if not flag:
-        response=client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=input.query
-        )
+        response=chat_instance.send_message(input.query)
         return {
             "query": input.query,
             "response":response.text
