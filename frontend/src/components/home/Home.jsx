@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from "react";
+import {useSelector} from 'react-redux';
 import axios from "axios";
 
 const Home = () => {
+  const isLoggedIn = useSelector((state)=>state.isLoggedIn);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const chatBoxRef = useRef(null);
@@ -42,7 +44,22 @@ const Home = () => {
   const handleKeyDown = (e) => {
     if (e.key === "Enter") sendMessage();
   };
-
+  if (!isLoggedIn) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen bg-gray-900 text-white p-6">
+        <h1 className="text-3xl font-bold mb-4">Welcome to your personal Chatbot</h1>
+        <p className="text-lg text-gray-300 max-w-xl text-center mb-6">
+      Login to access the system
+        </p>
+        <button
+          onClick={() => window.location.href = "/signin"} 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg shadow-md transition"
+        >
+          Login to Continue
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-6">
       <div className="w-full max-w-2xl bg-white shadow-lg rounded-lg p-6 flex flex-col">
